@@ -4,20 +4,19 @@ using UnityEngine;
 
 public class PelotaController : MonoBehaviour
 {
-    public Rigidbody2D m_rigidbody;
+    private Rigidbody2D m_rigidbody;
 
     // Start is called before the first frame update
-    void Start()
+    private void Awake()
     {
         m_rigidbody = GetComponent<Rigidbody2D>();
 
-        m_rigidbody.velocity = new Vector3(1,1,0);
     }
-
-    // Update is called once per frame
-    void Update()
+    void Start()
     {
-       // m_rigidbody.velocity = new Vector3(1, 1, 0);
 
+        m_rigidbody.velocity = new Vector3(3*(Random.Range(-1,2)),3,0);
     }
+
+  
 }
