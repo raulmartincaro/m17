@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.InputSystem.Utilities;
 using UnityEngineInternal;
 
 public class PlataformaController : MonoBehaviour
@@ -18,6 +19,8 @@ public class PlataformaController : MonoBehaviour
     [SerializeField]
     private float m_MovementSpeed = 3f;
 
+    [SerializeField]
+    private EliminatorController m_eliminator;
     private Boolean m_bolaActiva;
     private void Awake()
     {
@@ -34,6 +37,7 @@ public class PlataformaController : MonoBehaviour
     void Start()
     {
         m_bolaActiva = false;
+        m_eliminator.onzemuriose += Recarga; 
     }
 
     // Update is called once per frame
@@ -51,5 +55,13 @@ public class PlataformaController : MonoBehaviour
             m_bolaActiva = true;
             Instantiate(m_pelota, this.transform.position, Quaternion.identity);
         }
+    }
+    private void Recarga()
+    {
+        m_bolaActiva = false;
+    }
+    private void OnDisable()
+    {
+        m_eliminator.onzemuriose -= Recarga;
     }
 }
