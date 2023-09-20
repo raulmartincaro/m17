@@ -1,27 +1,25 @@
 using System.Collections;
 using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
 
-public class Eliminator : MonoBehaviour
+public class BloqueController : MonoBehaviour
 {
+
     // Start is called before the first frame update
     void Start()
     {
-        
     }
 
     // Update is called once per frame
     void Update()
     {
-       
+        
     }
-
-    void OnCollisionEnter2D(Collision2D col)
+    private void OnCollisionEnter2D(Collision2D collision)
     {
-        if (col.gameObject.tag == "Pelota")
+        if (collision.gameObject.tag == "Pelota")
         {
-            Destroy(col.gameObject);
+            Destroy(this.gameObject);
         }
     }
 }
