@@ -27,26 +27,28 @@ public class BloqueController : MonoBehaviour
     }
     private void OnCollisionEnter2D(Collision2D collision)
     {
+       
         if (collision.gameObject.tag == "Pelota")
         {
+            Destroy(this.gameObject);
+            m_DarRecompensa.Raise(100);
             int rng = Random.Range(1, 101);
-            
+            Debug.Log(rng);
             switch (rng)
             {
-                case < 90:
+                case > 76:
                     m_capsule.GetComponent<CapsuleController>().LoadInfo(m_capsuleInfos[2]);
                 break;
-                case > 90:
-                    m_capsule.GetComponent<CapsuleController>().LoadInfo(m_capsuleInfos[1]);
-                    break;
-                case > 11:
+                case < 25:
                     m_capsule.GetComponent<CapsuleController>().LoadInfo(m_capsuleInfos[0]);
+                    break;
+               default:
+                    m_capsule.GetComponent<CapsuleController>().LoadInfo(m_capsuleInfos[1]);
                 break;
             }
             Instantiate(m_capsule, this.transform.position, Quaternion.identity);
 
-            Destroy(this.gameObject);
-            m_DarRecompensa.Raise(100);
+           
 
 
 

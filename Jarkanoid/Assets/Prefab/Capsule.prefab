@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 9098291641774601448}
   - component: {fileID: 2242848315522558575}
   - component: {fileID: 4058509212255251880}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Capsule
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -161,3 +161,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 272d775a804b7a044aeec9cabb5ac590, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  recompensa: 100
+  darRecompensa: {fileID: 11400000, guid: 012c29b5746bcbc47854f5fea6002b43, type: 2}
