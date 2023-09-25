@@ -161,3 +161,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 742b57bc2949043429ad0f0c97e3a561, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  laMoricion: {fileID: 11400000, guid: 3c0d26bca6b84224188321abd9f16d64, type: 2}

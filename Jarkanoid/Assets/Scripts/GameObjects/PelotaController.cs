@@ -6,6 +6,9 @@ public class PelotaController : MonoBehaviour
 {
     private Rigidbody2D m_rigidbody;
 
+    [SerializeField]
+    GameEventInteger laMoricion;
+
     // Start is called before the first frame update
     private void Awake()
     {
@@ -18,5 +21,9 @@ public class PelotaController : MonoBehaviour
         m_rigidbody.velocity = new Vector3(3*(Random.Range(-1,2)),3,0);
     }
 
-  
+    private void OnDestroy()
+    {
+        laMoricion.Raise(-1);
+    }
+
 }

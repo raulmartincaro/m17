@@ -18,10 +18,9 @@ public class PlataformaController : MonoBehaviour
 
     [SerializeField]
     private float m_MovementSpeed = 3f;
-
-    [SerializeField]
-    private EliminatorController m_eliminator;
     private Boolean m_bolaActiva;
+
+    private Vector3 m_PositionInicial;
     private void Awake()
     {
         m_Input = Instantiate(m_inputActions);
@@ -31,13 +30,14 @@ public class PlataformaController : MonoBehaviour
         
 
         m_Input.FindActionMap("Player").Enable();
+        m_PositionInicial=this.transform.position;
 
     }
     // Start is called before the first frame update
     void Start()
     {
         m_bolaActiva = false;
-        m_eliminator.onzemuriose += Recarga; 
+        
     }
 
     // Update is called once per frame
@@ -56,12 +56,12 @@ public class PlataformaController : MonoBehaviour
             Instantiate(m_pelota, this.transform.position, Quaternion.identity);
         }
     }
-    private void Recarga()
+    public void muertepelota(int n)
     {
         m_bolaActiva = false;
+        this.transform.position = m_PositionInicial;
     }
-    private void OnDisable()
-    {
-        m_eliminator.onzemuriose -= Recarga;
-    }
+
+
+  
 }
