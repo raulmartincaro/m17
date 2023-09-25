@@ -22,6 +22,15 @@
                     "processors": "NormalizeVector2",
                     "interactions": "Press(behavior=2)",
                     "initialStateCheck": true
+                },
+                {
+                    "name": "PointerPosition",
+                    "type": "Value",
+                    "id": "060242de-f16c-4203-9b3e-0ced3117dc5e",
+                    "expectedControlType": "Vector2",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": true
                 }
             ],
             "bindings": [
@@ -37,18 +46,7 @@
                     "isPartOfComposite": false
                 },
                 {
-                    "name": "",
-                    "id": "aad5c2fa-a423-430e-bae9-31a80d611a1e",
-                    "path": "",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "Movimiento",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "2D Vector",
+                    "name": "Teclado",
                     "id": "f5f69446-8cca-4e10-8d1f-85469fead682",
                     "path": "2DVector",
                     "interactions": "",
@@ -79,6 +77,28 @@
                     "action": "Movimiento",
                     "isComposite": false,
                     "isPartOfComposite": true
+                },
+                {
+                    "name": "",
+                    "id": "4d62cd53-7118-4872-8b32-8b75909f176e",
+                    "path": "<Mouse>/position",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "PointerPosition",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "6d7390ac-6bd3-4461-b1b4-029da1ca140a",
+                    "path": "<Touchscreen>/primaryTouch/position",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "PointerPosition",
+                    "isComposite": false,
+                    "isPartOfComposite": false
                 }
             ]
         }

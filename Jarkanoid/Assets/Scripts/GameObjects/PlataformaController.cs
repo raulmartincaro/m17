@@ -15,9 +15,12 @@ public class PlataformaController : MonoBehaviour
     private InputActionAsset m_inputActions;
     private InputActionAsset m_Input;
     private InputAction m_MovementAction;
+    private InputAction m_PointerAction;
+
+    private Rigidbody2D m_Rigidbody;
 
     [SerializeField]
-    private float m_MovementSpeed = 3f;
+    private float m_MovementSpeed = 10f;
     private Boolean m_bolaActiva;
 
     private Vector3 m_PositionInicial;
@@ -27,25 +30,31 @@ public class PlataformaController : MonoBehaviour
 
         m_Input.FindActionMap("Player").FindAction("Sacar").performed += Tirarpelota;
         m_MovementAction = m_Input.FindActionMap("Player").FindAction("Movimiento");
-        
-
+        m_PointerAction = m_Input.FindActionMap("Player").FindAction("PointerPosition");
+      
         m_Input.FindActionMap("Player").Enable();
-        m_PositionInicial=this.transform.position;
+        m_PositionInicial =this.transform.position;
+        m_Rigidbody = GetComponent<Rigidbody2D>();
 
     }
-    // Start is called before the first frame update
     void Start()
     {
         m_bolaActiva = false;
         
     }
-
-    // Update is called once per frame
     void Update()
     {
         Vector2 delta = m_MovementAction.ReadValue<Vector2>();
-       
-        transform.position += m_MovementSpeed * new Vector3(delta.x, delta.y, 0) * Time.deltaTime;
+        m_Rigidbody.velocity = (m_MovementSpeed * new Vector3(delta.x, 0, 0) * Time.deltaTime).normalized;
+        
+        
+        Vector3 m_mousePosition = m_PointerAction.ReadValue<Vector2>();
+        Vector3 m_coordenadasMundo = Camera.main.ScreenToWorldPoint(m_mousePosition).normalized;
+        Debug.Log("mouse position: " + m_mousePosition);
+        Debug.Log("mundo position: " + m_coordenadasMundo);
+
+        m_Rigidbody.velocity = (m_MovementSpeed * new Vector3(delta.x, 0, 0) * Time.deltaTime).normalized;
+        
     }
 
     private void Tirarpelota(InputAction.CallbackContext context)
@@ -62,6 +71,12 @@ public class PlataformaController : MonoBehaviour
         this.transform.position = m_PositionInicial;
     }
 
+    public void moverMouse(InputAction.CallbackContext context)
+    {
 
-  
+        
+
+
+    }
+
 }
