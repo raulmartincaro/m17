@@ -401,7 +401,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_pelota: {fileID: 8881895426295667237, guid: bf50759638a687a4ba800dc07570e621, type: 3}
   m_inputActions: {fileID: -944628639613478452, guid: 80ddb2dc89d0a9e4381c2b4684ecba39, type: 3}
-  m_MovementSpeed: 10
+  m_MovementSpeed: 5
 --- !u!114 &267840532
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -19,11 +19,14 @@ public class PlataformaController : MonoBehaviour
 
     private Rigidbody2D m_Rigidbody;
 
+    private int m_LateralMovement;
+
     [SerializeField]
     private float m_MovementSpeed = 10f;
     private Boolean m_bolaActiva;
 
     private Vector3 m_PositionInicial;
+    private Vector3 m_PosicionActual;
     private void Awake()
     {
         m_Input = Instantiate(m_inputActions);
@@ -45,16 +48,35 @@ public class PlataformaController : MonoBehaviour
     void Update()
     {
         Vector2 delta = m_MovementAction.ReadValue<Vector2>();
-        m_Rigidbody.velocity = (m_MovementSpeed * new Vector3(delta.x, 0, 0) * Time.deltaTime).normalized;
-        
-        
-        Vector3 m_mousePosition = m_PointerAction.ReadValue<Vector2>();
-        Vector3 m_coordenadasMundo = Camera.main.ScreenToWorldPoint(m_mousePosition).normalized;
-        Debug.Log("mouse position: " + m_mousePosition);
-        Debug.Log("mundo position: " + m_coordenadasMundo);
+        m_PosicionActual=this.transform.position;
 
-        m_Rigidbody.velocity = (m_MovementSpeed * new Vector3(delta.x, 0, 0) * Time.deltaTime).normalized;
-        
+        Vector3 m_mousePosition = m_PointerAction.ReadValue<Vector2>();
+        Vector3 m_coordenadasMundo = Camera.main.ScreenToWorldPoint(m_mousePosition);
+        //Debug.Log("mouse position: " + m_mousePosition);
+        //Debug.Log("mundo position: " + m_coordenadasMundo);
+        if (m_coordenadasMundo.x-0.1 > m_PosicionActual.x)
+        {
+            m_LateralMovement = 1;
+        }
+        else
+        {
+
+            if (m_coordenadasMundo.x+0.1 < m_PosicionActual.x)
+            {
+                m_LateralMovement = -1;
+            }
+            else
+            {
+                m_LateralMovement = 0;
+            }
+
+        }
+
+
+    }
+    private void FixedUpdate()
+    {
+        m_Rigidbody.velocity = m_MovementSpeed * new Vector3(m_LateralMovement, 0, 0);
     }
 
     private void Tirarpelota(InputAction.CallbackContext context)
