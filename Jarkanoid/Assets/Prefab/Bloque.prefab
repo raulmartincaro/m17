@@ -171,7 +171,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0b150a5b5d94cd24aac887c46e844b7e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_DarRecompensa: {fileID: 11400000, guid: 012c29b5746bcbc47854f5fea6002b43, type: 2}
+  m_Destrucccion: {fileID: 11400000, guid: 012c29b5746bcbc47854f5fea6002b43, type: 2}
   m_capsule: {fileID: 1646819617794884904, guid: 97920d7fd7929514fbf17316e8df932d, type: 3}
   m_capsuleInfos:
   - {fileID: 11400000, guid: 329e7e0b299895546a7d070655e2c11d, type: 2}

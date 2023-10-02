@@ -7,18 +7,17 @@ using static UnityEngine.RuleTile.TilingRuleOutput;
 public class BloqueController : MonoBehaviour
 {
     [SerializeField]
-    GameEventInteger m_DarRecompensa;
-
+    GameEventInteger m_Destrucccion;
+    
     [SerializeField]
     private GameObject m_capsule;
 
     [SerializeField]
     private CapsuleInfo[] m_capsuleInfos;
 
-    // Start is called before the first frame update
-    void Start()
-    {
-    }
+    public delegate void BloqueDestroyed(GameObject go);
+    public event BloqueDestroyed OnBloqueDestroyed;
+
 
     // Update is called once per frame
     void Update()
@@ -30,8 +29,9 @@ public class BloqueController : MonoBehaviour
        
         if (collision.gameObject.tag == "Pelota")
         {
-            Destroy(this.gameObject);
-            m_DarRecompensa.Raise(100);
+            OnBloqueDestroyed?.Invoke(gameObject);
+            
+            m_Destrucccion.Raise(100);
             int rng = Random.Range(1, 101);
             Debug.Log(rng);
             switch (rng)
@@ -47,14 +47,7 @@ public class BloqueController : MonoBehaviour
                 break;
             }
             Instantiate(m_capsule, this.transform.position, Quaternion.identity);
-
-           
-
-
-
-            
-
-
+            Destroy(this.gameObject);
         }
     }
 }
