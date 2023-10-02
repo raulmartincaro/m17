@@ -93,12 +93,5 @@ public class PlataformaController : MonoBehaviour
         this.transform.position = m_PositionInicial;
     }
 
-    public void moverMouse(InputAction.CallbackContext context)
-    {
-
-        
-
-
-    }
-
+   
 }

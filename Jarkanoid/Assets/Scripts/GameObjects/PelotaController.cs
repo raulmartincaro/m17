@@ -17,13 +17,12 @@ public class PelotaController : MonoBehaviour
     }
     void Start()
     {
-
         m_rigidbody.velocity = new Vector3(3*(Random.Range(-1f,2f)),3,0);
     }
 
     private void OnDestroy()
     {
-        laMoricion.Raise(-1);
+        laMoricion.Raise(1);
     }
 
 }
