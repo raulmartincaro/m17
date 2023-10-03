@@ -136,6 +136,9 @@ GameObject:
   - component: {fileID: 4030673}
   - component: {fileID: 4030672}
   - component: {fileID: 4030676}
+  - component: {fileID: 4030679}
+  - component: {fileID: 4030678}
+  - component: {fileID: 4030677}
   m_Layer: 5
   m_Name: Canvas
   m_TagString: Untagged
@@ -247,7 +250,90 @@ MonoBehaviour:
   vides: 0
   m_level: {fileID: 829223862}
   level: 0
-  m_gameManager: {fileID: 0}
+--- !u!114 &4030677
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4030671}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 12abbe1e114853b4f8a037515a5f06a5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Event: {fileID: 11400000, guid: 77648b0c3410bb34eb3bbf8f0d90a656, type: 2}
+  Response:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 4030676}
+        m_TargetAssemblyTypeName: UIGameController, Assembly-CSharp
+        m_MethodName: pierdeVidas
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+--- !u!114 &4030678
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4030671}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 12abbe1e114853b4f8a037515a5f06a5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Event: {fileID: 11400000, guid: 9dac98820e3e7dc418550a6dc4a87073, type: 2}
+  Response:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 4030676}
+        m_TargetAssemblyTypeName: UIGameController, Assembly-CSharp
+        m_MethodName: cambiaPuntos
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+--- !u!114 &4030679
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4030671}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 12abbe1e114853b4f8a037515a5f06a5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Event: {fileID: 11400000, guid: 1291f83c84a37f645afe6c6bb257459b, type: 2}
+  Response:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 4030676}
+        m_TargetAssemblyTypeName: UIGameController, Assembly-CSharp
+        m_MethodName: subirNiveles
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &267840526
 GameObject:
   m_ObjectHideFlags: 0
@@ -601,8 +687,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 06cefee2b15c2b14db9c386338b3c529, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_ConseguirPuntos: {fileID: 11400000, guid: 9dac98820e3e7dc418550a6dc4a87073, type: 2}
   punts: 0
+  m_PerderVidas: {fileID: 11400000, guid: 77648b0c3410bb34eb3bbf8f0d90a656, type: 2}
   vides: 0
+  m_SubirNiveles: {fileID: 11400000, guid: 1291f83c84a37f645afe6c6bb257459b, type: 2}
   level: 0
   m_GameOverText: 
 --- !u!4 &409965472

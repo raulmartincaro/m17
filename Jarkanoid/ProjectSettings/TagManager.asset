@@ -7,6 +7,7 @@ TagManager:
   - Pelota
   - Pared
   - Plataforma
+  - Capsulas
   layers:
   - Default
   - TransparentFX
