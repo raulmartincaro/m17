@@ -8,4 +8,5 @@ public class CapsuleInfo : ScriptableObject
 {
     public Color color;
     public int valor;
+    public bool powerUp;
 }

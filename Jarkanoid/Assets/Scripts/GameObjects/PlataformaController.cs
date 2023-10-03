@@ -93,5 +93,21 @@ public class PlataformaController : MonoBehaviour
         this.transform.position = m_PositionInicial;
     }
 
-   
+    private void OnDisable()
+    {
+        m_Input.FindActionMap("Player").FindAction("Sacar").performed -= Tirarpelota;
+    }
+
+    public void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (collision.gameObject.tag == "Capsulas")
+        {
+            if(collision.gameObject.GetComponent<CapsuleController>().powerUp==true)
+            {
+                Debug.Log("pupururururrururururururururur!");
+            }
+        } 
+        
+    }
+
 }

@@ -8,11 +8,14 @@ public class CapsuleController : MonoBehaviour
     int recompensa;
     [SerializeField]
     GameEventInteger darRecompensa;
+    public bool powerUp;
+
     public void LoadInfo(CapsuleInfo capsuleInfo)
     {
        
         GetComponent<SpriteRenderer>().color = capsuleInfo.color;
         recompensa = capsuleInfo.valor;
+        powerUp = capsuleInfo.powerUp;
     }
 
     private void OnCollisionEnter2D(Collision2D collision)

@@ -16,23 +16,17 @@ public class UIGameController : MonoBehaviour
     TMPro.TextMeshProUGUI m_level;
     public int level;
 
-    private void Awake()
-    {
-        GameManager.ConseguirPuntos() += cambiaPuntos;
-    }
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
 
     public void cambiaPuntos(int n)
     {
-
+        m_puntuació.text = "Puntuació: " + n;
+    }
+    public void pierdeVidas(int n)
+    {
+        m_vides.text = "Vides: " + n;
+    }
+    public void subirNiveles(int n)
+    {
+        m_level.text = "Nivell: " + n;
     }
 }

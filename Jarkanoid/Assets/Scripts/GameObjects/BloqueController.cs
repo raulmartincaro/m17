@@ -33,17 +33,19 @@ public class BloqueController : MonoBehaviour
             
             m_Destrucccion.Raise(100);
             int rng = Random.Range(1, 101);
-            Debug.Log(rng);
             switch (rng)
             {
                 case > 76:
-                    m_capsule.GetComponent<CapsuleController>().LoadInfo(m_capsuleInfos[2]);
+                    m_capsule.GetComponent<CapsuleController>().LoadInfo(m_capsuleInfos[3]);
                 break;
-                case < 25:
-                    m_capsule.GetComponent<CapsuleController>().LoadInfo(m_capsuleInfos[0]);
+                case > 50:
+                    m_capsule.GetComponent<CapsuleController>().LoadInfo(m_capsuleInfos[2]);
                     break;
-               default:
+                case > 25:
                     m_capsule.GetComponent<CapsuleController>().LoadInfo(m_capsuleInfos[1]);
+                    break;
+                default:
+                    m_capsule.GetComponent<CapsuleController>().LoadInfo(m_capsuleInfos[0]);
                 break;
             }
             Instantiate(m_capsule, this.transform.position, Quaternion.identity);

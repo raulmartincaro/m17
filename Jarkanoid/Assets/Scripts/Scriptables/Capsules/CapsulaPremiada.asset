@@ -10,8 +10,8 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 83ebc68699eef8e499971441516482d5, type: 3}
-  m_Name: Capsule wiii
+  m_Name: CapsulaPremiada
   m_EditorClassIdentifier: 
-  color: {r: 0.8773585, g: 0.7106947, b: 0.120016046, a: 1}
-  valor: 1000
+  color: {r: 1, g: 0.9669811, b: 0.9669811, a: 1}
+  valor: 250
   powerUp: 1
