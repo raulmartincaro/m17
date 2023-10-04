@@ -1,9 +1,11 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Data.SqlTypes;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.InputSystem.Utilities;
+using UnityEngine.UIElements;
 using UnityEngineInternal;
 
 public class PlataformaController : MonoBehaviour
@@ -27,6 +29,9 @@ public class PlataformaController : MonoBehaviour
 
     private Vector3 m_PositionInicial;
     private Vector3 m_PosicionActual;
+    private Vector3 m_MyScaleInicial;
+    bool m_powerUp;
+    float m_TimePowerUp;
     private void Awake()
     {
         m_Input = Instantiate(m_inputActions);
@@ -37,7 +42,9 @@ public class PlataformaController : MonoBehaviour
       
         m_Input.FindActionMap("Player").Enable();
         m_PositionInicial =this.transform.position;
+        m_MyScaleInicial = this.transform.localScale;
         m_Rigidbody = GetComponent<Rigidbody2D>();
+        m_powerUp = false;
 
     }
     void Start()
@@ -69,10 +76,11 @@ public class PlataformaController : MonoBehaviour
             {
                 m_LateralMovement = 0;
             }
-
         }
 
-
+        if (m_powerUp)
+            m_TimePowerUp -= Time.deltaTime;
+        
     }
     private void FixedUpdate()
     {
@@ -96,6 +104,8 @@ public class PlataformaController : MonoBehaviour
     private void OnDisable()
     {
         m_Input.FindActionMap("Player").FindAction("Sacar").performed -= Tirarpelota;
+        StopCoroutine("poweeeer");
+
     }
 
     public void OnCollisionEnter2D(Collision2D collision)
@@ -104,10 +114,22 @@ public class PlataformaController : MonoBehaviour
         {
             if(collision.gameObject.GetComponent<CapsuleController>().powerUp==true)
             {
-                Debug.Log("pupururururrururururururururur!");
+                StopCoroutine("poweeeer");
+                m_TimePowerUp = 15f;
+                StartCoroutine("poweeeer");
             }
         } 
         
     }
+    IEnumerator poweeeer()
+    {
+        m_powerUp = true;
+        transform.localScale =new Vector3 (2,0.2f,1);
+        yield return new WaitForSeconds(m_TimePowerUp);
+        transform.localScale = m_MyScaleInicial;
+        m_powerUp = false;
+    }
+    
+
 
 }
