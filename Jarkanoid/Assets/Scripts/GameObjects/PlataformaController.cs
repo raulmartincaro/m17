@@ -114,9 +114,9 @@ public class PlataformaController : MonoBehaviour
         {
             if(collision.gameObject.GetComponent<CapsuleController>().powerUp==true)
             {
-                StopCoroutine("poweeeer");
+                StopCoroutine(poweeeer());
                 m_TimePowerUp = 15f;
-                StartCoroutine("poweeeer");
+                StartCoroutine(poweeeer());
             }
         } 
         
