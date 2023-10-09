@@ -50,7 +50,6 @@ public class PlataformaController : MonoBehaviour
     void Start()
     {
         m_bolaActiva = false;
-        
     }
     void Update()
     {
@@ -115,11 +114,11 @@ public class PlataformaController : MonoBehaviour
             if(collision.gameObject.GetComponent<CapsuleController>().powerUp==true)
             {
                 StopCoroutine(poweeeer());
+                m_powerUp = false;
                 m_TimePowerUp = 15f;
                 StartCoroutine(poweeeer());
             }
-        } 
-        
+        }  
     }
     IEnumerator poweeeer()
     {
@@ -129,7 +128,4 @@ public class PlataformaController : MonoBehaviour
         transform.localScale = m_MyScaleInicial;
         m_powerUp = false;
     }
-    
-
-
 }

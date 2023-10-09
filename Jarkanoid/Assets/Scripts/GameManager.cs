@@ -24,6 +24,8 @@ public class GameManager : MonoBehaviour
 
     public string m_GameOverText;
 
+    private AudioSource m_audiosource;
+
     private void Awake()
     {
         if (m_Instance == null)
@@ -36,6 +38,8 @@ public class GameManager : MonoBehaviour
 
         DontDestroyOnLoad(gameObject);
         SceneManager.sceneLoaded += OnSceneLoaded;
+
+        m_audiosource = GetComponent<AudioSource>();
     }
     private void Start()
     {
@@ -89,7 +93,11 @@ public class GameManager : MonoBehaviour
     public void Restart()
     {
         SceneManager.LoadScene("GameScene");
+    }
 
+    public void ReproducirSonido(AudioClip sonido)
+    {
+        m_audiosource.PlayOneShot(sonido);
     }
 
 }

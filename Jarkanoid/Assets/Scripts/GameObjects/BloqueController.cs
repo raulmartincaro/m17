@@ -18,6 +18,8 @@ public class BloqueController : MonoBehaviour
     public delegate void BloqueDestroyed(GameObject go);
     public event BloqueDestroyed OnBloqueDestroyed;
 
+    [SerializeField]
+    private AudioClip m_clip1;
 
     // Update is called once per frame
     void Update()
@@ -49,6 +51,7 @@ public class BloqueController : MonoBehaviour
                 break;
             }
             Instantiate(m_capsule, this.transform.position, Quaternion.identity);
+            GameManager.Instance.ReproducirSonido(m_clip1);
             Destroy(this.gameObject);
         }
     }

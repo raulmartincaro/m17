@@ -8,13 +8,11 @@ public class PelotaController : MonoBehaviour
 
     [SerializeField]
     GameEventInteger laMoricion;
-    Vector2 m_position;
 
     // Start is called before the first frame update
     private void Awake()
     {
         m_rigidbody = GetComponent<Rigidbody2D>();
-        StartCoroutine(comprobacionEncallado());
 
     }
     void Start()
@@ -30,24 +28,25 @@ public class PelotaController : MonoBehaviour
         StopAllCoroutines();
     }
 
-    IEnumerator comprobacionEncallado()
+    public void OnCollisionEnter2D(Collision2D collision)
     {
-        while (true)
+        Vector2 f=new Vector2(0,0);
+        if (this.m_rigidbody.velocity.x == 0)
         {
-            m_position = this.transform.position;
-            yield return new WaitForSeconds(5f);
-            if (m_position.x == this.transform.position.x)
-            {
-                Debug.Log("empujo en x");
-                Vector2 f = new Vector2(4, 0);
-                this.m_rigidbody.AddForce(f);
-            }
-            if (m_position.y == this.transform.position.y)
-            {
-                Debug.Log("empujo en y");
-                Vector2 f = new Vector2(0, -4);
-                this.m_rigidbody.AddForce(f);
-            }
+            if (this.m_rigidbody.position.x >= 0)
+                f = new Vector2(-8, 0);
+            else
+                f = new Vector2(8, 0);
+
         }
+        if (this.m_rigidbody.velocity.y == 0)
+        {
+            if (this.m_rigidbody.position.y >= 0)
+                f = new Vector2(0, -8);
+            else
+                f = new Vector2(0, 8);
+
+        }
+        this.m_rigidbody.AddForce(f);
     }
 }
