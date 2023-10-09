@@ -6,6 +6,8 @@ public class PelotaController : MonoBehaviour
 {
     private Rigidbody2D m_rigidbody;
 
+    private AudioSource m_audioSource;
+
     [SerializeField]
     GameEventInteger laMoricion;
 
@@ -13,6 +15,7 @@ public class PelotaController : MonoBehaviour
     private void Awake()
     {
         m_rigidbody = GetComponent<Rigidbody2D>();
+        m_audioSource= GetComponent<AudioSource>();
 
     }
     void Start()
@@ -40,13 +43,13 @@ public class PelotaController : MonoBehaviour
 
         }
         if (this.m_rigidbody.velocity.y == 0)
-        {
-            if (this.m_rigidbody.position.y >= 0)
-                f = new Vector2(0, -8);
-            else
-                f = new Vector2(0, 8);
-
-        }
+          f = new Vector2(0, -8);
+            
         this.m_rigidbody.AddForce(f);
+
+        if (collision.gameObject.tag != "Bloque")
+        {
+            m_audioSource.Play();
+        }
     }
 }

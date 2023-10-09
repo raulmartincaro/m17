@@ -46,6 +46,28 @@
                     "isPartOfComposite": false
                 },
                 {
+                    "name": "",
+                    "id": "f64d813f-62b5-4617-a7cf-4cf5b6b454e3",
+                    "path": "<Touchscreen>/primaryTouch",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Sacar",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "15c93e6c-fbcd-4efd-acfb-0fb3cd357759",
+                    "path": "<Mouse>/leftButton",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Sacar",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
                     "name": "Teclado",
                     "id": "f5f69446-8cca-4e10-8d1f-85469fead682",
                     "path": "2DVector",

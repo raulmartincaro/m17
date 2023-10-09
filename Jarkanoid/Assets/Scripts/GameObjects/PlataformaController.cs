@@ -35,12 +35,11 @@ public class PlataformaController : MonoBehaviour
     private void Awake()
     {
         m_Input = Instantiate(m_inputActions);
-
-        m_Input.FindActionMap("Player").FindAction("Sacar").performed += Tirarpelota;
         m_MovementAction = m_Input.FindActionMap("Player").FindAction("Movimiento");
         m_PointerAction = m_Input.FindActionMap("Player").FindAction("PointerPosition");
-      
+        m_Input.FindActionMap("Player").FindAction("Sacar").performed += Tirarpelota;
         m_Input.FindActionMap("Player").Enable();
+
         m_PositionInicial =this.transform.position;
         m_MyScaleInicial = this.transform.localScale;
         m_Rigidbody = GetComponent<Rigidbody2D>();
@@ -66,7 +65,6 @@ public class PlataformaController : MonoBehaviour
         }
         else
         {
-
             if (m_coordenadasMundo.x+0.1 < m_PosicionActual.x)
             {
                 m_LateralMovement = -1;
@@ -76,10 +74,9 @@ public class PlataformaController : MonoBehaviour
                 m_LateralMovement = 0;
             }
         }
-
         if (m_powerUp)
             m_TimePowerUp -= Time.deltaTime;
-        
+       
     }
     private void FixedUpdate()
     {
@@ -92,8 +89,11 @@ public class PlataformaController : MonoBehaviour
         {
             m_bolaActiva = true;
             Instantiate(m_pelota, this.transform.position, Quaternion.identity);
-        }
+        }   
     }
+
+  
+
     public void muertepelota(int n)
     {
         m_bolaActiva = false;
@@ -103,6 +103,7 @@ public class PlataformaController : MonoBehaviour
     private void OnDisable()
     {
         m_Input.FindActionMap("Player").FindAction("Sacar").performed -= Tirarpelota;
+        m_Input.FindActionMap("Player").Disable();
         StopCoroutine("poweeeer");
 
     }

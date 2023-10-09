@@ -21,6 +21,9 @@ public class BloqueController : MonoBehaviour
     [SerializeField]
     private AudioClip m_clip1;
 
+    [SerializeField]
+    ParticleSystem efecto;
+
     // Update is called once per frame
     void Update()
     {
@@ -51,6 +54,7 @@ public class BloqueController : MonoBehaviour
                 break;
             }
             Instantiate(m_capsule, this.transform.position, Quaternion.identity);
+            Instantiate(efecto, this.transform.position,Quaternion.identity);
             GameManager.Instance.ReproducirSonido(m_clip1);
             Destroy(this.gameObject);
         }
