@@ -43,7 +43,7 @@ public class PlataformaController : MonoBehaviour
         m_PositionInicial =this.transform.position;
         m_MyScaleInicial = this.transform.localScale;
         m_Rigidbody = GetComponent<Rigidbody2D>();
-        m_powerUp = false;
+        
 
     }
     void Start()
@@ -74,8 +74,7 @@ public class PlataformaController : MonoBehaviour
                 m_LateralMovement = 0;
             }
         }
-        if (m_powerUp)
-            m_TimePowerUp -= Time.deltaTime;
+        
        
     }
     private void FixedUpdate()
@@ -114,8 +113,7 @@ public class PlataformaController : MonoBehaviour
         {
             if(collision.gameObject.GetComponent<CapsuleController>().powerUp==true)
             {
-                StopCoroutine(poweeeer());
-                m_powerUp = false;
+                StopCoroutine(poweeeer());        
                 m_TimePowerUp = 15f;
                 StartCoroutine(poweeeer());
             }
@@ -123,10 +121,10 @@ public class PlataformaController : MonoBehaviour
     }
     IEnumerator poweeeer()
     {
-        m_powerUp = true;
+       
         transform.localScale =new Vector3 (2,0.2f,1);
         yield return new WaitForSeconds(m_TimePowerUp);
         transform.localScale = m_MyScaleInicial;
-        m_powerUp = false;
+      
     }
 }

@@ -34,7 +34,7 @@ public class PelotaController : MonoBehaviour
     public void OnCollisionEnter2D(Collision2D collision)
     {
         Vector2 f=new Vector2(0,0);
-        if (this.m_rigidbody.velocity.x == 0)
+        if (Mathf.Abs(this.m_rigidbody.velocity.x) <= 0.2f)
         {
             if (this.m_rigidbody.position.x >= 0)
                 f = new Vector2(-8, 0);
@@ -42,7 +42,7 @@ public class PelotaController : MonoBehaviour
                 f = new Vector2(8, 0);
 
         }
-        if (this.m_rigidbody.velocity.y == 0)
+        if (Mathf.Abs(this.m_rigidbody.velocity.y) <= 0)
           f = new Vector2(0, -8);
             
         this.m_rigidbody.AddForce(f);
