@@ -6,14 +6,9 @@ using UnityEngine.InputSystem;
 
 public class CharacterController : MonoBehaviour
 {
-    
-
+   
     private enum SwitchMachinesStates {NONE, IDLE, WALK, HIT1, HIT2};
     private SwitchMachinesStates m_CurrentState;
-
-
-    private float m_MovementSpeed = 3f;
-
 
     private void ChangeState(SwitchMachinesStates newState)
     {
