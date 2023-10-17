@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEditor.Timeline.Actions;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -40,13 +41,18 @@ public class CharacterController : MonoBehaviour
             case SwitchMachinesStates.HIT1:
 
                 m_Rigidbody.velocity = Vector2.zero;
-           
+                m_Damage = m_Hit1Damage;
+                m_Animator.Play("Pegar1");
 
                 break;
 
-            default:
-                break;
+            case SwitchMachinesStates.HIT2:
 
+                m_Rigidbody.velocity = Vector2.zero;
+                m_Damage = m_Hit2Damage;
+                m_Animator.Play("Pegar2");
+
+                break;
         }
 
     }
@@ -66,19 +72,42 @@ public class CharacterController : MonoBehaviour
             case SwitchMachinesStates.WALK:
                 m_Rigidbody.velocity= m_MovementAction.ReadValue<Vector2>() * m_Speed;
 
+                if (m_Rigidbody.velocity.x < 0)
+                {
+                    m_Rigidbody.transform.eulerAngles = Vector3.up*180;
+                }else if (m_Rigidbody.velocity.x > 0)
+                {
+                    m_Rigidbody.transform.eulerAngles = Vector3.zero;
+                }
 
-                Debug.Log("" + m_Rigidbody.velocity);
-                if(m_Rigidbody.velocity ==Vector2.zero)
+                if (m_Rigidbody.velocity ==Vector2.zero)
                     ChangeState(SwitchMachinesStates.IDLE);
                 break;
-            case SwitchMachinesStates.HIT1:
-                break;
+            
         }
     }
 
     private void ExitState()
     {
-        //esto es para los combos ya lo tocaremos
+        switch (m_CurrentState)
+        {
+
+            case SwitchMachinesStates.HIT1:
+
+                m_ComboAvailable = false;
+
+                break;
+
+            case SwitchMachinesStates.HIT2:
+
+                m_ComboAvailable = false;
+
+                break;
+
+            default:
+                break;
+        }
+
 
     }
 
@@ -96,10 +125,33 @@ public class CharacterController : MonoBehaviour
                 ChangeState(SwitchMachinesStates.HIT1);
 
                 break;
+            case SwitchMachinesStates.HIT1:
 
-            default:
-                break;
+            if (m_ComboAvailable)
+                ChangeState(SwitchMachinesStates.HIT2);
+               
+
+              break;
+
+
         }
+    }
+
+
+    public void InitComboWindow()
+    {
+        m_ComboAvailable = true;
+    }
+
+    public void EndComboWindow()
+    {
+        m_ComboAvailable = false;
+    }
+
+
+    public void EndHit()
+    {
+        ChangeState(SwitchMachinesStates.IDLE);
     }
 
 
@@ -119,6 +171,8 @@ public class CharacterController : MonoBehaviour
     private int m_Hit1Damage = 2;
     [SerializeField]
     private int m_Hit2Damage = 5;
+    private int m_Damage;
+    private bool m_ComboAvailable;
 
 
     void Awake()
@@ -143,6 +197,8 @@ public class CharacterController : MonoBehaviour
     void Start()
     {
         InitState(SwitchMachinesStates.IDLE);
+        m_Damage = 0;
+        m_ComboAvailable = false;
 
     }
 
