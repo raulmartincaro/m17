@@ -4,6 +4,11 @@ using UnityEngine;
 
 public class EnemyController : MonoBehaviour
 {
+
+    [SerializeField]
+    Collider2D m_deteccion;
+    [SerializeField]
+    Collider2D m_deteccionGolpeacion;
     // Start is called before the first frame update
     void Start()
     {
