@@ -5,6 +5,10 @@ TagManager:
   serializedVersion: 2
   tags:
   - player
+  - playerHitBox
+  - playerHurtBox
+  - enemyHurtBox
+  - enemyHitBox
   layers:
   - Default
   - TransparentFX
@@ -14,8 +18,8 @@ TagManager:
   - UI
   - Jugador
   - Enemigos
-  - 
-  - 
+  - BuscadoresEnemigo
+  - HitboxPlayer
   - 
   - 
   - 

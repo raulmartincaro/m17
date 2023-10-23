@@ -6,6 +6,10 @@ using UnityEngine;
 public class BuscadorController : MonoBehaviour
 {
     bool m_encontrado;
+    [SerializeField]
+    public GameObject m_objetivo;
+
+
     public bool Encontrado => m_encontrado;
     public bool AlternativaEncontrado
     {
@@ -16,7 +20,8 @@ public class BuscadorController : MonoBehaviour
     {
         if (collision.gameObject.tag == "player")
         {
-            m_encontrado=true;
+            m_objetivo = collision.gameObject;
+            m_encontrado =true;
         }
     }
 
@@ -26,6 +31,7 @@ public class BuscadorController : MonoBehaviour
         if (collision.gameObject.tag == "player")
         {
             m_encontrado = false;
+            
         }
     }
 

@@ -34,14 +34,12 @@ public class CharacterController : MonoBehaviour
             case SwitchMachinesStates.WALK:
                 m_Animator.Play("Correr");
 
-
-
                 break;
 
             case SwitchMachinesStates.HIT1:
 
                 m_Rigidbody.velocity = Vector2.zero;
-                m_Damage = m_Hit1Damage;
+                m_HitboxCharacter.Damage = m_Hit1Damage;
                 m_Animator.Play("Pegar1");
 
                 break;
@@ -49,7 +47,7 @@ public class CharacterController : MonoBehaviour
             case SwitchMachinesStates.HIT2:
 
                 m_Rigidbody.velocity = Vector2.zero;
-                m_Damage = m_Hit2Damage;
+                m_HitboxCharacter.Damage = m_Hit2Damage;
                 m_Animator.Play("Pegar2");
 
                 break;
@@ -171,8 +169,9 @@ public class CharacterController : MonoBehaviour
     private int m_Hit1Damage = 2;
     [SerializeField]
     private int m_Hit2Damage = 5;
-    private int m_Damage;
     private bool m_ComboAvailable;
+    [SerializeField]
+    private HitboxCharacter m_HitboxCharacter;
 
 
     void Awake()
@@ -197,7 +196,6 @@ public class CharacterController : MonoBehaviour
     void Start()
     {
         InitState(SwitchMachinesStates.IDLE);
-        m_Damage = 0;
         m_ComboAvailable = false;
 
     }
