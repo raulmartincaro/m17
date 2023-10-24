@@ -16,9 +16,11 @@ public class EnemyController : MonoBehaviour
     public bool m_cooldown;
     [SerializeField]
     GameObject m_objetivo;
-    [SerializeField]
+
     int m_vida;
-  
+    private Animator m_Animator;
+
+
     void Start()
     {
         m_deteccion= GetComponentInChildren<BuscadorController>();
@@ -65,14 +67,19 @@ public class EnemyController : MonoBehaviour
         m_CurrentState = currentState;
         switch (m_CurrentState)
         {
-           
+            case switchMachineStates.PATROL:
+                m_Animator.Play("Patrol");
+                break;
+            case switchMachineStates.CHASE:
+                m_Animator.Play("Chase");
+                break;
+
             case switchMachineStates.ATTACK:
                 m_Rigidbody.velocity=Vector2.zero;
                 if (!m_cooldown)
                 {
-                    Debug.Log("Pego al jugador");
+                    m_Animator.Play("Hit");
                 }
-                StartCoroutine("noPuedoGolpear");
                 break;
         }
 
@@ -84,20 +91,13 @@ public class EnemyController : MonoBehaviour
             case switchMachineStates.PATROL:
                 if (m_detectado)
                 {
-                    
                     ChangeState(switchMachineStates.CHASE);
                 }
-
                 break;
             case switchMachineStates.CHASE:
                 m_Rigidbody.velocity = (m_objetivo.transform.position - m_Rigidbody.transform.position).normalized * 2;
                 if (m_golpeo)
                    ChangeState(switchMachineStates.ATTACK);
-                break;
-            case switchMachineStates.ATTACK:
-               
-                ChangeState(switchMachineStates.CHASE);
-                
                 break;
 
         }
@@ -115,14 +115,16 @@ public class EnemyController : MonoBehaviour
         }
     }
 
-    IEnumerator noPuedoGolpear()
+    public void noPuedoGolpear()
     {
-        new WaitForSeconds(2);
         if (!m_deteccionGolpeacion.Golpeable)
         {
             m_golpeo = false;
             ChangeState(switchMachineStates.CHASE);
         }
-        return null;
+        else
+        {
+            m_Animator.Play("Hit");
+        }
     }
 }
