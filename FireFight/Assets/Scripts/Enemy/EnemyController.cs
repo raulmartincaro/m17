@@ -7,6 +7,7 @@ using static EnemyController;
 public class EnemyController : MonoBehaviour
 {
     private enum switchMachineStates {NONE,PATROL,CHASE,ATTACK}
+    [SerializeField]
     private switchMachineStates m_CurrentState;
     BuscadorController m_deteccion;
     bool m_detectado;
@@ -71,14 +72,14 @@ public class EnemyController : MonoBehaviour
                 m_Animator.Play("Patrol");
                 break;
             case switchMachineStates.CHASE:
-                m_Animator.Play("Chase");
+                m_Animator.Play("Perseguir");
                 break;
 
             case switchMachineStates.ATTACK:
                 m_Rigidbody.velocity=Vector2.zero;
                 if (!m_cooldown)
                 {
-                    m_Animator.Play("Hit");
+                   // m_Animator.Play("Hit");
                 }
                 break;
         }
@@ -91,12 +92,13 @@ public class EnemyController : MonoBehaviour
             case switchMachineStates.PATROL:
                 if (m_detectado)
                 {
+                    Debug.Log("Empieza la persecusion");
                     ChangeState(switchMachineStates.CHASE);
                 }
                 break;
             case switchMachineStates.CHASE:
                 m_Rigidbody.velocity = (m_objetivo.transform.position - m_Rigidbody.transform.position).normalized * 2;
-                if (m_golpeo)
+               if (m_golpeo)
                    ChangeState(switchMachineStates.ATTACK);
                 break;
 

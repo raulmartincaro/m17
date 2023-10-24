@@ -36,7 +36,7 @@ Transform:
   - {fileID: 6092419653682914474}
   - {fileID: 2178371200183735801}
   m_Father: {fileID: 0}
-  m_RootOrder: 4
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &288303609204022472
 SpriteRenderer:
@@ -150,9 +150,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a7975ec3f5bc3b74d8b604a95c2dc07b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_CurrentState: 0
   m_cooldown: 0
   m_objetivo: {fileID: 0}
-  m_vida: 0
 --- !u!1 &1729073307241170949
 GameObject:
   m_ObjectHideFlags: 0
@@ -356,7 +356,7 @@ CapsuleCollider2D:
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
-  m_Size: {x: 0.75, y: 1.5}
+  m_Size: {x: 1, y: 1.5}
   m_Direction: 0
 --- !u!114 &2495934801076224629
 MonoBehaviour:
