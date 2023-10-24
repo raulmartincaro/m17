@@ -72,14 +72,14 @@ public class EnemyController : MonoBehaviour
                 m_Animator.Play("Patrol");
                 break;
             case switchMachineStates.CHASE:
-                m_Animator.Play("Perseguir");
+                //m_Animator.Play("Perseguir");
                 break;
 
             case switchMachineStates.ATTACK:
                 m_Rigidbody.velocity=Vector2.zero;
                 if (!m_cooldown)
                 {
-                   // m_Animator.Play("Hit");
+                   m_Animator.Play("Hit");
                 }
                 break;
         }
