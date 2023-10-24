@@ -7,7 +7,6 @@ using static EnemyController;
 public class EnemyController : MonoBehaviour
 {
     private enum switchMachineStates {NONE,PATROL,CHASE,ATTACK}
-    [SerializeField]
     private switchMachineStates m_CurrentState;
     BuscadorController m_deteccion;
     bool m_detectado;
@@ -17,6 +16,8 @@ public class EnemyController : MonoBehaviour
     public bool m_cooldown;
     [SerializeField]
     GameObject m_objetivo;
+    [SerializeField]
+    int m_vida;
   
     void Start()
     {
@@ -28,6 +29,7 @@ public class EnemyController : MonoBehaviour
         m_Rigidbody = GetComponent<Rigidbody2D>();
         m_cooldown = false;
         ChangeState(m_CurrentState);
+        m_vida = 10;
     }
 
     // Update is called once per frame
@@ -71,7 +73,6 @@ public class EnemyController : MonoBehaviour
                     Debug.Log("Pego al jugador");
                 }
                 StartCoroutine("noPuedoGolpear");
-
                 break;
         }
 
@@ -81,7 +82,6 @@ public class EnemyController : MonoBehaviour
         switch (m_CurrentState)
         {
             case switchMachineStates.PATROL:
-                Debug.Log("Estoy patrullando");
                 if (m_detectado)
                 {
                     
@@ -90,7 +90,6 @@ public class EnemyController : MonoBehaviour
 
                 break;
             case switchMachineStates.CHASE:
-                Debug.Log("Estoy buscando al jugador");
                 m_Rigidbody.velocity = (m_objetivo.transform.position - m_Rigidbody.transform.position).normalized * 2;
                 if (m_golpeo)
                    ChangeState(switchMachineStates.ATTACK);
@@ -110,20 +109,20 @@ public class EnemyController : MonoBehaviour
     {
         if (collision.gameObject.tag == "playerHitBox")
         {
-            Debug.Log("Me han hecho un total de "+ collision.gameObject.GetComponent<HitboxCharacter>().Damage+" daño.");
+            m_vida -= collision.gameObject.GetComponent<HitboxCharacter>().Damage;
+            if (m_vida <= 0)
+                Destroy(this.gameObject);
         }
     }
 
     IEnumerator noPuedoGolpear()
     {
-        m_cooldown = true;
-        new WaitForSeconds(1);
-        if (m_deteccionGolpeacion)
+        new WaitForSeconds(2);
+        if (!m_deteccionGolpeacion.Golpeable)
         {
-            m_cooldown = false;
+            m_golpeo = false;
+            ChangeState(switchMachineStates.CHASE);
         }
-        
-        ChangeState(switchMachineStates.CHASE);
         return null;
     }
 }

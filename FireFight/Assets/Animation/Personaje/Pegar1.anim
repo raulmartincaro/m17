@@ -31,7 +31,7 @@ AnimationClip:
         inWeight: 0
         outWeight: 0
       - serializedVersion: 3
-        time: 0.25
+        time: 0.16666667
         value: 1
         inSlope: Infinity
         outSlope: Infinity
@@ -40,7 +40,7 @@ AnimationClip:
         inWeight: 0
         outWeight: 0
       - serializedVersion: 3
-        time: 0.6166667
+        time: 0.41666666
         value: 0
         inSlope: Infinity
         outSlope: Infinity
@@ -61,13 +61,13 @@ AnimationClip:
     curve:
     - time: 0
       value: {fileID: 1136130322, guid: 013b933dec919e745aeb490be1b2e501, type: 3}
-    - time: 0.13333334
+    - time: 0.083333336
       value: {fileID: 310308395, guid: 013b933dec919e745aeb490be1b2e501, type: 3}
-    - time: 0.25
+    - time: 0.16666667
       value: {fileID: 21300000, guid: bd8577e6d0f22214b99cc6f32e776d88, type: 3}
-    - time: 0.45
+    - time: 0.3
       value: {fileID: 21300000, guid: 152a93d12e6948d40a7468dcca4ccb32, type: 3}
-    - time: 0.6166667
+    - time: 0.41666666
       value: {fileID: 1136130322, guid: 013b933dec919e745aeb490be1b2e501, type: 3}
     attribute: m_Sprite
     path: 
@@ -110,7 +110,7 @@ AnimationClip:
     m_AdditiveReferencePoseClip: {fileID: 0}
     m_AdditiveReferencePoseTime: 0
     m_StartTime: 0
-    m_StopTime: 0.6333333
+    m_StopTime: 0.43333334
     m_OrientationOffsetY: 0
     m_Level: 0
     m_CycleOffset: 0
@@ -140,7 +140,7 @@ AnimationClip:
         inWeight: 0
         outWeight: 0
       - serializedVersion: 3
-        time: 0.25
+        time: 0.16666667
         value: 1
         inSlope: Infinity
         outSlope: Infinity
@@ -149,7 +149,7 @@ AnimationClip:
         inWeight: 0
         outWeight: 0
       - serializedVersion: 3
-        time: 0.6166667
+        time: 0.41666666
         value: 0
         inSlope: Infinity
         outSlope: Infinity
@@ -176,14 +176,14 @@ AnimationClip:
     floatParameter: 0
     intParameter: 0
     messageOptions: 0
-  - time: 0.5833333
+  - time: 0.4
     functionName: EndComboWindow
     data: 
     objectReferenceParameter: {fileID: 0}
     floatParameter: 0
     intParameter: 0
     messageOptions: 0
-  - time: 0.6166667
+  - time: 0.41666666
     functionName: EndHit
     data: 
     objectReferenceParameter: {fileID: 0}
