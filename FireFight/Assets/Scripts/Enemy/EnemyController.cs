@@ -19,8 +19,8 @@ public class EnemyController : MonoBehaviour
     int m_vida;
     private Animator m_Animator;
 
-    /*public delegate void EnemyDestroyed(GameObject go);
-    public event EnemyDestroyed OnEnemyDestroyed;*/
+    public delegate void EnemyDestroyed(GameObject go);
+    public event EnemyDestroyed OnEnemyDestroyed;
 
 
     void Start()
@@ -129,7 +129,7 @@ public class EnemyController : MonoBehaviour
             if (m_vida <= 0)
             {
                 Destroy(this.gameObject);
-                //OnEnemyDestroyed?.Invoke(gameObject);
+                OnEnemyDestroyed?.Invoke(gameObject);
             }
                 
         }

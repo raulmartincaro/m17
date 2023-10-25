@@ -9,6 +9,7 @@ public class SpawnerController : MonoBehaviour
     private int m_spawnNumber;
     private int m_ronda;
     private bool m_finSpawn;
+    [SerializeField]
     private List<GameObject> m_misHijos;
 
     void Start()
@@ -36,13 +37,15 @@ public class SpawnerController : MonoBehaviour
             {
                 GameObject enemy = Instantiate(m_Enemy, new Vector2(-4, Random.Range(-2.8f, 3f)), Quaternion.identity);
                 m_misHijos.Add(enemy);
+                enemy.GetComponent<EnemyController>().OnEnemyDestroyed += enemyDie;
             }
             else
             {
                 GameObject enemy = Instantiate(m_Enemy, new Vector2(4, Random.Range(-2.8f, 3f)), Quaternion.identity);
                 m_misHijos.Add(enemy);
+                enemy.GetComponent<EnemyController>().OnEnemyDestroyed += enemyDie;
             }
-           // enemy.GetComponent<EnemyController>().OnEnemyDestroyed += enemyDie;
+            
             
 
             yield return new WaitForSeconds(5);
@@ -50,7 +53,7 @@ public class SpawnerController : MonoBehaviour
         m_finSpawn = true;
     }
 
-   /* private void enemyDie(GameObject go)
+   private void enemyDie(GameObject go)
     {
         go.GetComponent<EnemyController>().OnEnemyDestroyed -= enemyDie;
         m_misHijos.Remove(go);
@@ -60,5 +63,5 @@ public class SpawnerController : MonoBehaviour
             m_spawnNumber = 5 + (m_ronda * 3);
             StartCoroutine("SpawnEnemies");
         }
-    }*/
+    }
 }
