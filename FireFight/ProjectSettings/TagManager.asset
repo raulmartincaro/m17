@@ -9,6 +9,7 @@ TagManager:
   - playerHurtBox
   - enemyHurtBox
   - enemyHitBox
+  - pared
   layers:
   - Default
   - TransparentFX
@@ -21,7 +22,7 @@ TagManager:
   - BuscadoresEnemigo
   - HitboxPlayer
   - HitboxEnemy
-  - 
+  - Pared
   - 
   - 
   - 

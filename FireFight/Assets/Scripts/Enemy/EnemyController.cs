@@ -15,11 +15,12 @@ public class EnemyController : MonoBehaviour
     bool m_golpeo;
     Rigidbody2D m_Rigidbody;
     public bool m_cooldown;
-    [SerializeField]
     GameObject m_objetivo;
-
     int m_vida;
     private Animator m_Animator;
+
+    /*public delegate void EnemyDestroyed(GameObject go);
+    public event EnemyDestroyed OnEnemyDestroyed;*/
 
 
     void Start()
@@ -30,12 +31,11 @@ public class EnemyController : MonoBehaviour
         m_golpeo = false;
         m_CurrentState = switchMachineStates.PATROL;
         m_Rigidbody = GetComponent<Rigidbody2D>();
-        m_cooldown = false;
+        m_Animator= GetComponent<Animator>();
         ChangeState(m_CurrentState);
         m_vida = 10;
     }
 
-    // Update is called once per frame
     void Update()
     {
         if (m_deteccion.Encontrado)
@@ -47,6 +47,15 @@ public class EnemyController : MonoBehaviour
         if(m_deteccionGolpeacion.Golpeable)
         {
             m_golpeo = true;
+        }
+        //para orientar al bicho
+        if (m_Rigidbody.velocity.x < 0)
+        {
+            m_Rigidbody.transform.eulerAngles = Vector3.up * 180;
+        }
+        else if (m_Rigidbody.velocity.x > 0)
+        {
+            m_Rigidbody.transform.eulerAngles = Vector3.zero;
         }
 
         UpdateState();
@@ -70,17 +79,23 @@ public class EnemyController : MonoBehaviour
         {
             case switchMachineStates.PATROL:
                 m_Animator.Play("Patrol");
+                int dir = Random.Range(0, 2);
+                if (dir == 0)
+                {
+                    m_Rigidbody.velocity = new Vector2(1, 0).normalized * 1*Time.deltaTime;
+                }
+                else
+                {
+                    m_Rigidbody.velocity = new Vector2(-1, 0).normalized * 1*Time.deltaTime;
+                }
                 break;
             case switchMachineStates.CHASE:
-                //m_Animator.Play("Perseguir");
+                m_Animator.Play("Chase");
                 break;
 
             case switchMachineStates.ATTACK:
                 m_Rigidbody.velocity=Vector2.zero;
-                if (!m_cooldown)
-                {
-                   m_Animator.Play("Hit");
-                }
+                m_Animator.Play("Hit");
                 break;
         }
 
@@ -90,9 +105,9 @@ public class EnemyController : MonoBehaviour
         switch (m_CurrentState)
         {
             case switchMachineStates.PATROL:
+                m_Rigidbody.velocity = new Vector2(1, 0).normalized * 1;
                 if (m_detectado)
                 {
-                    Debug.Log("Empieza la persecusion");
                     ChangeState(switchMachineStates.CHASE);
                 }
                 break;
@@ -101,7 +116,6 @@ public class EnemyController : MonoBehaviour
                if (m_golpeo)
                    ChangeState(switchMachineStates.ATTACK);
                 break;
-
         }
     }
 
@@ -113,20 +127,33 @@ public class EnemyController : MonoBehaviour
         {
             m_vida -= collision.gameObject.GetComponent<HitboxCharacter>().Damage;
             if (m_vida <= 0)
+            {
                 Destroy(this.gameObject);
+                //OnEnemyDestroyed?.Invoke(gameObject);
+            }
+                
         }
+        
     }
 
-    public void noPuedoGolpear()
+    private void puedoGolpear()
     {
-        if (!m_deteccionGolpeacion.Golpeable)
+        if (!m_deteccionGolpeacion.Golpeable == true)
         {
             m_golpeo = false;
             ChangeState(switchMachineStates.CHASE);
         }
-        else
+
+    }
+
+
+    private void OnCollisionEnter(Collision collision)
+    {
+
+        Debug.Log("Me he comido la pared");
+        if (collision.gameObject.tag == "pared" && m_CurrentState == switchMachineStates.PATROL)
         {
-            m_Animator.Play("Hit");
+            m_Rigidbody.velocity *= -1;
         }
     }
 }

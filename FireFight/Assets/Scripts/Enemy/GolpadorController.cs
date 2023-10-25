@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class GolpadorController : MonoBehaviour
 {
+    [SerializeField]
     bool m_golpeable;
     public bool Golpeable => m_golpeable;
     public bool AlternativaEncontrado
