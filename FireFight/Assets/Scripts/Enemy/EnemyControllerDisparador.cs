@@ -1,23 +1,22 @@
 using System.Collections;
 using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
-using static EnemyController;
 
-public class EnemyController : MonoBehaviour
+public class EnemyControllerDisparador : MonoBehaviour
 {
-    private enum switchMachineStates {NONE,PATROL,CHASE,ATTACK}
+
+    private enum switchMachineStates { NONE, PATROL, ATTACK, RECARGANDO}
     [SerializeField]
     private switchMachineStates m_CurrentState;
     BuscadorController m_deteccion;
     bool m_detectado;
-    GolpadorController m_deteccionGolpeacion;
-    bool m_golpeo;
     Rigidbody2D m_Rigidbody;
     GameObject m_objetivo;
     int m_vida;
     private Animator m_Animator;
     private Vector2 m_movement;
+    [SerializeField]
+    BalaController m_bala;
 
     public delegate void EnemyDestroyed(GameObject go);
     public event EnemyDestroyed OnEnemyDestroyed;
@@ -25,13 +24,11 @@ public class EnemyController : MonoBehaviour
 
     void Start()
     {
-        m_deteccion= GetComponentInChildren<BuscadorController>();
+        m_deteccion = GetComponentInChildren<BuscadorController>();
         m_detectado = false;
-        m_deteccionGolpeacion = GetComponentInChildren<GolpadorController>();
-        m_golpeo = false;
         m_CurrentState = switchMachineStates.PATROL;
         m_Rigidbody = GetComponent<Rigidbody2D>();
-        m_Animator= GetComponent<Animator>();
+        m_Animator = GetComponent<Animator>();
         ChangeState(m_CurrentState);
         m_vida = 10;
         int dir = Random.Range(0, 2);
@@ -53,10 +50,7 @@ public class EnemyController : MonoBehaviour
             m_detectado = true;
 
         }
-        if(m_deteccionGolpeacion.Golpeable)
-        {
-            m_golpeo = true;
-        }
+       
         //para orientar al bicho
         if (m_Rigidbody.velocity.x < 0)
         {
@@ -88,15 +82,16 @@ public class EnemyController : MonoBehaviour
         {
             case switchMachineStates.PATROL:
                 m_Animator.Play("Patrol");
-                
-                break;
-            case switchMachineStates.CHASE:
-                m_Animator.Play("Chase");
-                break;
 
+                break;
             case switchMachineStates.ATTACK:
-                m_Rigidbody.velocity=Vector2.zero;
-                m_Animator.Play("Hit");
+                m_Rigidbody.velocity = Vector2.zero;
+                Disparo();
+                break;
+            case switchMachineStates.RECARGANDO:
+                m_Rigidbody.velocity = Vector2.zero;
+                Debug.Log("preparo la carag");
+                m_Animator.Play("Cargar");
                 break;
         }
 
@@ -106,21 +101,17 @@ public class EnemyController : MonoBehaviour
         switch (m_CurrentState)
         {
             case switchMachineStates.PATROL:
-                m_Rigidbody.velocity = m_movement.normalized * 1;
+                m_Rigidbody.velocity = m_movement.normalized * 5;
                 if (m_detectado)
                 {
-                    ChangeState(switchMachineStates.CHASE);
+                    ChangeState(switchMachineStates.RECARGANDO);
                 }
                 break;
-            case switchMachineStates.CHASE:
-                m_Rigidbody.velocity = (m_objetivo.transform.position - m_Rigidbody.transform.position).normalized * 2;
-               if (m_golpeo)
-                   ChangeState(switchMachineStates.ATTACK);
-                break;
+
         }
     }
 
-    
+
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
@@ -132,17 +123,7 @@ public class EnemyController : MonoBehaviour
                 Destroy(this.gameObject);
                 OnEnemyDestroyed?.Invoke(gameObject);
             }
-                
-        }
-        
-    }
 
-    private void puedoGolpear()
-    {
-        if (!m_deteccionGolpeacion.Golpeable == true)
-        {
-            m_golpeo = false;
-            ChangeState(switchMachineStates.CHASE);
         }
 
     }
@@ -156,5 +137,18 @@ public class EnemyController : MonoBehaviour
         }
     }
 
+    public void RecargaLista()
+    {
+        ChangeState(switchMachineStates.ATTACK);
+    }
+
+    public void Disparo()
+    {
+        m_bala.m_dir = m_objetivo.transform.position;
+        BalaController proyectil =Instantiate(m_bala,this.m_Rigidbody.transform.position, Quaternion.identity);
+        ChangeState(switchMachineStates.RECARGANDO);
+    }
+
+   
 
 }

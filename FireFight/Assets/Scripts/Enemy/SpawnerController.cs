@@ -5,9 +5,12 @@ using UnityEngine;
 public class SpawnerController : MonoBehaviour
 {
     [SerializeField]
-    GameObject m_Enemy;
+    GameObject m_Enemy; 
+    [SerializeField]
     private int m_spawnNumber;
+    [SerializeField]
     private int m_ronda;
+    [SerializeField]
     private bool m_finSpawn;
     [SerializeField]
     private List<GameObject> m_misHijos;
@@ -62,6 +65,7 @@ public class SpawnerController : MonoBehaviour
             m_ronda++;
             m_spawnNumber = 5 + (m_ronda * 3);
             StartCoroutine("SpawnEnemies");
+            m_finSpawn = false;
         }
     }
 }
