@@ -81,6 +81,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_objetivo: {fileID: 0}
+  m_circle: {fileID: 0}
 --- !u!1 &6006581050481249851
 GameObject:
   m_ObjectHideFlags: 0
@@ -111,7 +112,7 @@ Transform:
   m_GameObject: {fileID: 6006581050481249851}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0.6573733, y: 0.06678424, z: 0}
-  m_LocalScale: {x: -1, y: 1, z: 1}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1386401331377092728}
@@ -183,6 +184,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_CurrentState: 0
+  m_velocity: 0
   m_bala: {fileID: 3943211632711117377, guid: d29d731342efcfd46bf35647d480bb78, type: 3}
 --- !u!50 &5678038297458030933
 Rigidbody2D:
@@ -210,7 +212,7 @@ Rigidbody2D:
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 1
-  m_Constraints: 6
+  m_Constraints: 4
 --- !u!61 &5220844485045731960
 BoxCollider2D:
   m_ObjectHideFlags: 0

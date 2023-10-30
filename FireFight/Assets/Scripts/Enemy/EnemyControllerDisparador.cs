@@ -43,6 +43,7 @@ public class EnemyControllerDisparador : MonoBehaviour
         {
             m_movement = new Vector2(-1, 0);
         }
+        
     }
 
     void Update()
@@ -57,11 +58,12 @@ public class EnemyControllerDisparador : MonoBehaviour
         //para orientar al bicho
         if (m_Rigidbody.velocity.x < 0)
         {
-            m_Rigidbody.transform.eulerAngles = Vector3.up * 180;
+            m_Rigidbody.transform.eulerAngles = Vector3.zero;
+           
         }
         else if (m_Rigidbody.velocity.x > 0)
         {
-            m_Rigidbody.transform.eulerAngles = Vector3.zero;
+            m_Rigidbody.transform.eulerAngles = Vector3.up * 180;
         }
 
         UpdateState();
@@ -89,6 +91,16 @@ public class EnemyControllerDisparador : MonoBehaviour
                 break;
             case switchMachineStates.ATTACK:
                 m_Rigidbody.velocity = Vector2.zero;
+                if (m_Rigidbody.position.x > m_objetivo.transform.position.x)
+                {
+                    m_Rigidbody.transform.eulerAngles = Vector3.zero;
+                }
+                else
+                {
+                    m_Rigidbody.transform.eulerAngles = Vector3.up * 180;
+
+                }
+
                 Disparo();
                 break;
             case switchMachineStates.RECARGANDO:

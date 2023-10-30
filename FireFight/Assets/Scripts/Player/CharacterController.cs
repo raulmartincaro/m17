@@ -161,6 +161,8 @@ public class CharacterController : MonoBehaviour
     private Animator m_Animator;
     private Rigidbody2D m_Rigidbody;
 
+   
+
 
 
     [Header("Character Values")]
@@ -173,8 +175,8 @@ public class CharacterController : MonoBehaviour
     private bool m_ComboAvailable;
     [SerializeField]
     private HitboxCharacter m_HitboxCharacter;
-    int m_vida = 100;
-
+    [SerializeField]
+    EstadisticsInfo m_vida;
 
     void Awake()
     {
@@ -187,7 +189,7 @@ public class CharacterController : MonoBehaviour
 
         m_Rigidbody = GetComponent<Rigidbody2D>();
         m_Animator = GetComponent<Animator>();
-
+        m_vida.valorActual = 100;
 
 
 
@@ -199,6 +201,7 @@ public class CharacterController : MonoBehaviour
     {
         InitState(SwitchMachinesStates.IDLE);
         m_ComboAvailable = false;
+        
 
     }
 
@@ -218,22 +221,17 @@ public class CharacterController : MonoBehaviour
     {
         if (collision.gameObject.tag == "enemyHitBox")
         {
-            m_vida -= collision.gameObject.GetComponent<HitboxCharacter>().Damage;
-            Debug.Log("me han dado me queda "+m_vida);
-            if (m_vida <= 0)
-            {
-                Debug.Log("he muerto");
-            }
+            m_vida.valorActual -= collision.gameObject.GetComponent<HitboxCharacter>().Damage;
+           
+            
         }
         if (collision.gameObject.tag == "Bala")
         {
-            m_vida -= collision.gameObject.GetComponent<BalaController>().damage;
-            Debug.Log("me han dado me queda " + m_vida);
-            if (m_vida <= 0)
-            {
-                Debug.Log("he muerto");
-            }
+            m_vida.valorActual -= collision.gameObject.GetComponent<BalaController>().damage;
+           
+            
         }
+      
 
     }
 

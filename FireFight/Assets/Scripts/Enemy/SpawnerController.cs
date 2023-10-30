@@ -15,7 +15,7 @@ public class SpawnerController : MonoBehaviour
     [SerializeField]
     private int m_spawnNumber;
     [SerializeField]
-    private int m_ronda;
+    private EstadisticsInfo m_ronda;
     [SerializeField]
     private bool m_finSpawn;
     [SerializeField]
@@ -27,8 +27,8 @@ public class SpawnerController : MonoBehaviour
         Assert.IsNotNull(m_EnemySpawnRanger.GetComponent<EnemyControllerDisparador>());
 
         m_spawnNumber = 5;
+        m_ronda.valorActual = 1;
         StartCoroutine(SpawnEnemies());
-        m_ronda = 1;
         m_finSpawn = false;
     }
 
@@ -44,44 +44,54 @@ public class SpawnerController : MonoBehaviour
     {
         for(int x=0; x<m_spawnNumber; x++)
         {
-            int ranger = 0;
-            if (m_ronda > 1)
+
+            if (m_ronda.valorActual == 2)
             {
-                ranger=Random.Range(0, 2);
-            }
-                int orientacion=Random.Range(0, 2);
-            if (orientacion == 1)
-            {
-                
-                GameObject enemy = Instantiate(m_EnemySpawnMelee, new Vector2(-4, Random.Range(-2.8f, 3f)), Quaternion.identity);
-                enemy.GetComponent<EnemyController>().LoadInfo(m_infoSpawn[0]);
+                GameObject enemy = Instantiate(m_EnemySpawnRanger, new Vector2(4, Random.Range(-2.8f, 3f)), Quaternion.identity);
+                enemy.GetComponent<EnemyControllerDisparador>().LoadInfo(m_infoSpawn[1]);
                 m_misHijos.Add(enemy);
-                enemy.GetComponent<EnemyController>().OnEnemyDestroyed += enemyDie;
-            }
-            else
-            {
-                if (ranger == 1)
+                enemy.GetComponent<EnemyControllerDisparador>().OnEnemyRangedDestroyed += enemyDie;
+               
+            } else { 
+
+
+                int ranger = 0;
+                 if (m_ronda.valorActual > 1)
+                 {
+               
+                     ranger=Random.Range(0, 2);
+                 }
+                int orientacion=Random.Range(0, 2);
+                if (orientacion == 1)
                 {
-                    GameObject enemy = Instantiate(m_EnemySpawnRanger, new Vector2(4, Random.Range(-2.8f, 3f)), Quaternion.identity);
-                    enemy.GetComponent<EnemyControllerDisparador>().LoadInfo(m_infoSpawn[1]);
-                    m_misHijos.Add(enemy);
-                    enemy.GetComponent<EnemyControllerDisparador>().OnEnemyRangedDestroyed += enemyDie;
-                }
-                else
-                {
-                    GameObject enemy = Instantiate(m_EnemySpawnMelee, new Vector2(4, Random.Range(-2.8f, 3f)), Quaternion.identity);
+                
+                    GameObject enemy = Instantiate(m_EnemySpawnMelee, new Vector2(-4, Random.Range(-2.8f, 3f)), Quaternion.identity);
                     enemy.GetComponent<EnemyController>().LoadInfo(m_infoSpawn[0]);
                     m_misHijos.Add(enemy);
                     enemy.GetComponent<EnemyController>().OnEnemyDestroyed += enemyDie;
-                }
+                }else{
+                    if (ranger == 1)
+                    {
+                        GameObject enemy = Instantiate(m_EnemySpawnRanger, new Vector2(4, Random.Range(-2.8f, 3f)), Quaternion.identity);
+                        enemy.GetComponent<EnemyControllerDisparador>().LoadInfo(m_infoSpawn[1]);
+                        m_misHijos.Add(enemy);
+                        enemy.GetComponent<EnemyControllerDisparador>().OnEnemyRangedDestroyed += enemyDie;
+                    }else{
+                        GameObject enemy = Instantiate(m_EnemySpawnMelee, new Vector2(4, Random.Range(-2.8f, 3f)), Quaternion.identity);
+                        enemy.GetComponent<EnemyController>().LoadInfo(m_infoSpawn[0]);
+                        m_misHijos.Add(enemy);
+                        enemy.GetComponent<EnemyController>().OnEnemyDestroyed += enemyDie;
+                    }
 
                
-            }
+                }
 
-            yield return new WaitForSeconds(5);
+            }
+            yield return new WaitForSeconds(3);
+
         }
 
-        
+
         m_finSpawn = true;
     }
 
@@ -100,8 +110,8 @@ public class SpawnerController : MonoBehaviour
         m_misHijos.Remove(go);
         if (m_misHijos.Count == 0 && m_finSpawn==true)
         {
-            m_ronda++;
-            m_spawnNumber = 5 + (m_ronda * 3);
+            m_ronda.valorActual++;
+            m_spawnNumber = 5 + (m_ronda.valorActual * 3);
             StartCoroutine("SpawnEnemies");
             m_finSpawn = false;
         }
