@@ -4,6 +4,7 @@ using Unity.VisualScripting;
 using UnityEditor.Timeline.Actions;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using static EnemyController;
 
 public class CharacterController : MonoBehaviour
 {
@@ -172,6 +173,7 @@ public class CharacterController : MonoBehaviour
     private bool m_ComboAvailable;
     [SerializeField]
     private HitboxCharacter m_HitboxCharacter;
+    int m_vida = 100;
 
 
     void Awake()
@@ -209,6 +211,30 @@ public class CharacterController : MonoBehaviour
     {
         m_Input.FindActionMap("Tierra").FindAction("Attack").performed -= AttackAction;
         m_Input.FindActionMap("Tierra").Disable();
+    }
+
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.gameObject.tag == "enemyHitBox")
+        {
+            m_vida -= collision.gameObject.GetComponent<HitboxCharacter>().Damage;
+            Debug.Log("me han dado me queda "+m_vida);
+            if (m_vida <= 0)
+            {
+                Debug.Log("he muerto");
+            }
+        }
+        if (collision.gameObject.tag == "Bala")
+        {
+            m_vida -= collision.gameObject.GetComponent<BalaController>().damage;
+            Debug.Log("me han dado me queda " + m_vida);
+            if (m_vida <= 0)
+            {
+                Debug.Log("he muerto");
+            }
+        }
+
     }
 
 }

@@ -9,25 +9,28 @@ public class EnemyController : MonoBehaviour
     private enum switchMachineStates {NONE,PATROL,CHASE,ATTACK}
     [SerializeField]
     private switchMachineStates m_CurrentState;
-    BuscadorController m_deteccion;
+    BuscadorController m_detector;
     bool m_detectado;
-    GolpadorController m_deteccionGolpeacion;
+    GolpadorController m_detectorGolpe;
     bool m_golpeo;
     Rigidbody2D m_Rigidbody;
     GameObject m_objetivo;
     int m_vida;
     private Animator m_Animator;
     private Vector2 m_movement;
-
+    public int m_velocity = 0;
+    int m_damage;
     public delegate void EnemyDestroyed(GameObject go);
     public event EnemyDestroyed OnEnemyDestroyed;
+    [SerializeField]
+    private HitboxCharacter m_HitboxEnemy;
 
 
     void Start()
     {
-        m_deteccion= GetComponentInChildren<BuscadorController>();
+        m_detector= GetComponentInChildren<BuscadorController>();
         m_detectado = false;
-        m_deteccionGolpeacion = GetComponentInChildren<GolpadorController>();
+        m_detectorGolpe = GetComponentInChildren<GolpadorController>();
         m_golpeo = false;
         m_CurrentState = switchMachineStates.PATROL;
         m_Rigidbody = GetComponent<Rigidbody2D>();
@@ -47,13 +50,13 @@ public class EnemyController : MonoBehaviour
 
     void Update()
     {
-        if (m_deteccion.Encontrado)
+        if (m_detector.Encontrado)
         {
             m_objetivo = GetComponentInChildren<BuscadorController>().m_objetivo;
             m_detectado = true;
 
         }
-        if(m_deteccionGolpeacion.Golpeable)
+        if(m_detectorGolpe.Golpeable)
         {
             m_golpeo = true;
         }
@@ -106,7 +109,7 @@ public class EnemyController : MonoBehaviour
         switch (m_CurrentState)
         {
             case switchMachineStates.PATROL:
-                m_Rigidbody.velocity = m_movement.normalized * 1;
+                m_Rigidbody.velocity = m_movement.normalized * m_velocity;
                 if (m_detectado)
                 {
                     ChangeState(switchMachineStates.CHASE);
@@ -139,7 +142,7 @@ public class EnemyController : MonoBehaviour
 
     private void puedoGolpear()
     {
-        if (!m_deteccionGolpeacion.Golpeable == true)
+        if (!m_detectorGolpe.Golpeable == true)
         {
             m_golpeo = false;
             ChangeState(switchMachineStates.CHASE);
@@ -154,6 +157,15 @@ public class EnemyController : MonoBehaviour
 
             m_movement *= -1;
         }
+    }
+
+    public void LoadInfo(EnemyInfo enemyinfo)
+    {
+        GetComponent<SpriteRenderer>().color = enemyinfo.color;
+        m_velocity = enemyinfo.velocity;
+        m_damage = enemyinfo.damage;
+        m_HitboxEnemy.Damage = m_damage;
+       // m_detector.cambiarRadio(enemyinfo.deteccion);
     }
 
 

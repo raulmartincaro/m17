@@ -9,6 +9,7 @@ public class BalaController : MonoBehaviour
     public Vector3 m_dir;
     int velocity=5;
     Rigidbody2D m_rigibody;
+    public int damage;
 
     private void Start()
     {
@@ -24,9 +25,14 @@ public class BalaController : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        Debug.Log("he tocado una pared");
 
         if (collision.gameObject.tag == "pared")
+            Destroy(this.gameObject);
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.gameObject.tag == "player")
             Destroy(this.gameObject);
     }
 }
