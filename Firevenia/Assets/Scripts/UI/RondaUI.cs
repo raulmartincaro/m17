@@ -17,7 +17,7 @@ public class RondaUI : MonoBehaviour
     // Start is called before the first frame update
 
 
-    // actualizar ui mediante game event delegator
+    // Update is called once per frame
     void Update()
     {
         m_rondaText.text= "Ronda: " +  m_stadisticsRonda.valorActual;

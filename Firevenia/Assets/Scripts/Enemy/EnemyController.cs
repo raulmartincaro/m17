@@ -132,8 +132,8 @@ public class EnemyController : MonoBehaviour
             m_vida -= collision.gameObject.GetComponent<HitboxCharacter>().Damage;
             if (m_vida <= 0)
             {
-                OnEnemyDestroyed?.Invoke(gameObject); 
                 Destroy(this.gameObject);
+                OnEnemyDestroyed?.Invoke(gameObject);
             }
                 
         }
