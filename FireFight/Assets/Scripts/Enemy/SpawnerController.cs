@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEditor;
@@ -6,6 +7,9 @@ using UnityEngine.Assertions;
 
 public class SpawnerController : MonoBehaviour
 {
+
+    
+
     [SerializeField]
     List<EnemyInfo> m_infoSpawn;
     [SerializeField]
@@ -21,6 +25,11 @@ public class SpawnerController : MonoBehaviour
     [SerializeField]
     private List<GameObject> m_misHijos;
 
+    [SerializeField]
+    public GameEventInteger m_cambioRonda;
+
+
+
     void Start()
     {
         Assert.IsNotNull(m_EnemySpawnMelee.GetComponent<EnemyController>());
@@ -28,11 +37,12 @@ public class SpawnerController : MonoBehaviour
 
         m_spawnNumber = 5;
         m_ronda.valorActual = 1;
+        m_cambioRonda.Raise(m_ronda.valorActual);
         StartCoroutine(SpawnEnemies());
         m_finSpawn = false;
     }
 
-
+   
 
     void Update()
     {
@@ -47,7 +57,7 @@ public class SpawnerController : MonoBehaviour
 
             if (m_ronda.valorActual == 2)
             {
-                GameObject enemy = Instantiate(m_EnemySpawnRanger, new Vector2(4, Random.Range(-2.8f, 3f)), Quaternion.identity);
+                GameObject enemy = Instantiate(m_EnemySpawnRanger, new Vector2(4, UnityEngine. Random.Range(-2.8f, 3f)), Quaternion.identity);
                 enemy.GetComponent<EnemyControllerDisparador>().LoadInfo(m_infoSpawn[1]);
                 m_misHijos.Add(enemy);
                 enemy.GetComponent<EnemyControllerDisparador>().OnEnemyRangedDestroyed += enemyDie;
@@ -59,25 +69,25 @@ public class SpawnerController : MonoBehaviour
                  if (m_ronda.valorActual > 1)
                  {
                
-                     ranger=Random.Range(0, 2);
+                     ranger= UnityEngine.Random.Range(0, 2);
                  }
-                int orientacion=Random.Range(0, 2);
+                int orientacion= UnityEngine.Random.Range(0, 2);
                 if (orientacion == 1)
                 {
                 
-                    GameObject enemy = Instantiate(m_EnemySpawnMelee, new Vector2(-4, Random.Range(-2.8f, 3f)), Quaternion.identity);
+                    GameObject enemy = Instantiate(m_EnemySpawnMelee, new Vector2(-4, UnityEngine.Random.Range(-2.8f, 3f)), Quaternion.identity);
                     enemy.GetComponent<EnemyController>().LoadInfo(m_infoSpawn[0]);
                     m_misHijos.Add(enemy);
                     enemy.GetComponent<EnemyController>().OnEnemyDestroyed += enemyDie;
                 }else{
                     if (ranger == 1)
                     {
-                        GameObject enemy = Instantiate(m_EnemySpawnRanger, new Vector2(4, Random.Range(-2.8f, 3f)), Quaternion.identity);
+                        GameObject enemy = Instantiate(m_EnemySpawnRanger, new Vector2(4, UnityEngine.Random.Range(-2.8f, 3f)), Quaternion.identity);
                         enemy.GetComponent<EnemyControllerDisparador>().LoadInfo(m_infoSpawn[1]);
                         m_misHijos.Add(enemy);
                         enemy.GetComponent<EnemyControllerDisparador>().OnEnemyRangedDestroyed += enemyDie;
                     }else{
-                        GameObject enemy = Instantiate(m_EnemySpawnMelee, new Vector2(4, Random.Range(-2.8f, 3f)), Quaternion.identity);
+                        GameObject enemy = Instantiate(m_EnemySpawnMelee, new Vector2(4, UnityEngine.Random.Range(-2.8f, 3f)), Quaternion.identity);
                         enemy.GetComponent<EnemyController>().LoadInfo(m_infoSpawn[0]);
                         m_misHijos.Add(enemy);
                         enemy.GetComponent<EnemyController>().OnEnemyDestroyed += enemyDie;
@@ -111,6 +121,7 @@ public class SpawnerController : MonoBehaviour
         if (m_misHijos.Count == 0 && m_finSpawn==true)
         {
             m_ronda.valorActual++;
+            m_cambioRonda.Raise(m_ronda.valorActual);
             m_spawnNumber = 5 + (m_ronda.valorActual * 3);
             StartCoroutine("SpawnEnemies");
             m_finSpawn = false;
@@ -118,4 +129,6 @@ public class SpawnerController : MonoBehaviour
     }
 
     
+
+
 }

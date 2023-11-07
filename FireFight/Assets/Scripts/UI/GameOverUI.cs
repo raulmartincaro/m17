@@ -7,12 +7,13 @@ public class GameOverUI : MonoBehaviour
 {
     [SerializeField]
     TextMeshProUGUI m_rondaUI;
-    [SerializeField]
-    EstadisticsInfo m_stadisticsRonda;
+
+    GameManager m_gameManager;
 
     private void Start()
     {
-        m_rondaUI.text = "Game Over." + "Has arribat a la ronda: " + m_stadisticsRonda.valorActual;
+        m_gameManager = GameManager.Instance;
+        m_rondaUI.text = "Game Over." + "Has arribat a la ronda: " + m_gameManager.m_rondaActual;
     }
 
 }

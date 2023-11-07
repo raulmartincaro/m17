@@ -294,6 +294,8 @@ GameObject:
   - component: {fileID: 50760611}
   - component: {fileID: 50760610}
   - component: {fileID: 50760609}
+  - component: {fileID: 50760614}
+  - component: {fileID: 50760615}
   m_Layer: 5
   m_Name: Canvas
   m_TagString: Untagged
@@ -315,8 +317,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_rondaText: {fileID: 1982152501}
   m_rondaVida: {fileID: 200747295}
-  m_stadisticsRonda: {fileID: 11400000, guid: 2fc2662c4556c3e4391030f3ff7d4948, type: 2}
-  m_stadisticsVida: {fileID: 11400000, guid: ab3d6898999eb5e4aad7040498100f3c, type: 2}
 --- !u!114 &50760610
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -402,6 +402,62 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 0}
+--- !u!114 &50760614
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 50760608}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 12abbe1e114853b4f8a037515a5f06a5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Event: {fileID: 11400000, guid: 0d86385f87ccc8e4dacf969f8169b133, type: 2}
+  Response:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 50760609}
+        m_TargetAssemblyTypeName: RondaUI, Assembly-CSharp
+        m_MethodName: ActualizarVida
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+--- !u!114 &50760615
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 50760608}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 12abbe1e114853b4f8a037515a5f06a5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Event: {fileID: 11400000, guid: d41da2a7ed92d3a49bb3bf3448d69118, type: 2}
+  Response:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 50760609}
+        m_TargetAssemblyTypeName: RondaUI, Assembly-CSharp
+        m_MethodName: ActualizarRonda
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &200747293
 GameObject:
   m_ObjectHideFlags: 0
@@ -1082,6 +1138,7 @@ GameObject:
   m_Component:
   - component: {fileID: 895549870}
   - component: {fileID: 895549871}
+  - component: {fileID: 895549872}
   m_Layer: 0
   m_Name: GameManeger
   m_TagString: Untagged
@@ -1116,7 +1173,37 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ff44a268454b96643bc1c6c19caf2bab, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerLife: {fileID: 11400000, guid: ab3d6898999eb5e4aad7040498100f3c, type: 2}
+  m_vida: {fileID: 11400000, guid: ab3d6898999eb5e4aad7040498100f3c, type: 2}
+  m_ronda: {fileID: 11400000, guid: 2fc2662c4556c3e4391030f3ff7d4948, type: 2}
+  m_rondaFinal: {fileID: 11400000, guid: d41da2a7ed92d3a49bb3bf3448d69118, type: 2}
+--- !u!114 &895549872
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 895549869}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 12abbe1e114853b4f8a037515a5f06a5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Event: {fileID: 11400000, guid: 0d86385f87ccc8e4dacf969f8169b133, type: 2}
+  Response:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 895549871}
+        m_TargetAssemblyTypeName: GameManager, Assembly-CSharp
+        m_MethodName: ActualizarVida
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &1675819479
 GameObject:
   m_ObjectHideFlags: 0
@@ -1381,6 +1468,7 @@ MonoBehaviour:
   m_ronda: {fileID: 11400000, guid: 2fc2662c4556c3e4391030f3ff7d4948, type: 2}
   m_finSpawn: 0
   m_misHijos: []
+  m_cambioRonda: {fileID: 11400000, guid: d41da2a7ed92d3a49bb3bf3448d69118, type: 2}
 --- !u!4 &1800812722
 Transform:
   m_ObjectHideFlags: 0
@@ -1778,6 +1866,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6c886721c87c4e64d96661ce6451f801, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_cambioVida: {fileID: 11400000, guid: 0d86385f87ccc8e4dacf969f8169b133, type: 2}
   m_InputAsset: {fileID: -944628639613478452, guid: fb438cfd34cab7c4093e55df2a84983d, type: 3}
   m_Speed: 3
   m_Hit1Damage: 2

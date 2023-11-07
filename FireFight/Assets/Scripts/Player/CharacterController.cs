@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
@@ -11,6 +12,10 @@ public class CharacterController : MonoBehaviour
    
     private enum SwitchMachinesStates {NONE, IDLE, WALK, HIT1, HIT2};
     private SwitchMachinesStates m_CurrentState;
+    [SerializeField]
+    public GameEventInteger m_cambioVida;
+   
+
 
     private void ChangeState(SwitchMachinesStates newState)
     {
@@ -160,6 +165,7 @@ public class CharacterController : MonoBehaviour
     private InputAction m_MovementAction;
     private Animator m_Animator;
     private Rigidbody2D m_Rigidbody;
+    
 
    
 
@@ -178,31 +184,31 @@ public class CharacterController : MonoBehaviour
     [SerializeField]
     EstadisticsInfo m_vida;
 
+    public Action<int> OnActualizarVida;
+
+   
+
+
     void Awake()
     {
         m_Input = Instantiate(m_InputAsset);
         m_MovementAction = m_Input.FindActionMap("Tierra").FindAction("Movement");
         m_Input.FindActionMap("Tierra").FindAction("Attack").performed += AttackAction;
         m_Input.FindActionMap("Tierra").Enable();
-
-
-
         m_Rigidbody = GetComponent<Rigidbody2D>();
         m_Animator = GetComponent<Animator>();
         m_vida.valorActual = 100;
-
-
+        m_cambioVida.Raise(100);
 
     }
 
+    
 
-    // Start is called before the first frame update
+
     void Start()
     {
         InitState(SwitchMachinesStates.IDLE);
         m_ComboAvailable = false;
-        
-
     }
 
     // Update is called once per frame
@@ -222,8 +228,10 @@ public class CharacterController : MonoBehaviour
         if (collision.gameObject.tag == "enemyHitBox")
         {
             m_vida.valorActual -= collision.gameObject.GetComponent<HitboxCharacter>().Damage;
-           
-            
+            m_cambioVida.Raise(m_vida.valorActual);
+
+
+
         }
         if (collision.gameObject.tag == "Bala")
         {
@@ -234,5 +242,7 @@ public class CharacterController : MonoBehaviour
       
 
     }
+
+   
 
 }

@@ -1,7 +1,10 @@
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
+using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.SceneManagement;
+
 
 public class RondaUI : MonoBehaviour
 {
@@ -10,17 +13,15 @@ public class RondaUI : MonoBehaviour
     TextMeshProUGUI m_rondaText;
     [SerializeField]
     TextMeshProUGUI m_rondaVida;
-    [SerializeField]
-    EstadisticsInfo m_stadisticsRonda;
-    [SerializeField]
-    EstadisticsInfo m_stadisticsVida;
-    // Start is called before the first frame update
 
 
-    // actualizar ui mediante game event delegator
-    void Update()
+    public void ActualizarRonda(int n)
     {
-        m_rondaText.text= "Ronda: " +  m_stadisticsRonda.valorActual;
-        m_rondaVida.text = "Vida: " + m_stadisticsVida.valorActual;
+        m_rondaText.text = "Ronda: " + n;
+    }
+
+    public void ActualizarVida(int n)
+    {
+        m_rondaVida.text = "Vida: " + n;
     }
 }

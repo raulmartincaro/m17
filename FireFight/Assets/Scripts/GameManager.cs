@@ -1,13 +1,23 @@
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor.SearchService;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.TextCore.Text;
 
 public class GameManager : MonoBehaviour
 {
 
     [SerializeField]
-    EstadisticsInfo playerLife;
+    EstadisticsInfo m_vida;
+    [SerializeField]
+    EstadisticsInfo m_ronda;
+
+    [SerializeField]
+    GameEventInteger m_rondaFinal;
+
+    public int m_rondaActual;
+   
     private static GameManager m_Instance;
     public static GameManager Instance
     {
@@ -25,30 +35,23 @@ public class GameManager : MonoBehaviour
         }
 
         DontDestroyOnLoad(gameObject);
-        
-         
-    }
-    private void Update()
-    {
-        if (playerLife.valorActual < 0)
-        {
-            playerLife.valorActual = 100;
-            SceneManager.LoadScene("GameOver");
-        }
-        
     }
 
-   
+    public void ActualizarVida(int n)
+    {
+        if (n <= 0)
+        {
+            SceneManager.LoadScene("GameOver");
+            m_rondaActual = m_ronda.valorActual;
+        }
+
+    }
 
     public void Restart()
     {
+        m_vida.valorActual = 100;
         SceneManager.LoadScene("GameEscene");
-
+       
     }
-
-
-
-    
-    
 
 }
