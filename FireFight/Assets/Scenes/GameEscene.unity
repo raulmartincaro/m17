@@ -1138,7 +1138,6 @@ GameObject:
   m_Component:
   - component: {fileID: 895549870}
   - component: {fileID: 895549871}
-  - component: {fileID: 895549872}
   m_Layer: 0
   m_Name: GameManeger
   m_TagString: Untagged
@@ -1176,34 +1175,7 @@ MonoBehaviour:
   m_vida: {fileID: 11400000, guid: ab3d6898999eb5e4aad7040498100f3c, type: 2}
   m_ronda: {fileID: 11400000, guid: 2fc2662c4556c3e4391030f3ff7d4948, type: 2}
   m_rondaFinal: {fileID: 11400000, guid: d41da2a7ed92d3a49bb3bf3448d69118, type: 2}
---- !u!114 &895549872
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 895549869}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 12abbe1e114853b4f8a037515a5f06a5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Event: {fileID: 11400000, guid: 0d86385f87ccc8e4dacf969f8169b133, type: 2}
-  Response:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 895549871}
-        m_TargetAssemblyTypeName: GameManager, Assembly-CSharp
-        m_MethodName: ActualizarVida
-        m_Mode: 0
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+  m_rondaActual: 0
 --- !u!1 &1675819479
 GameObject:
   m_ObjectHideFlags: 0

@@ -37,14 +37,10 @@ public class GameManager : MonoBehaviour
         DontDestroyOnLoad(gameObject);
     }
 
-    public void ActualizarVida(int n)
-    {
-        if (n <= 0)
-        {
-            SceneManager.LoadScene("GameOver");
-            m_rondaActual = m_ronda.valorActual;
-        }
 
+    public void GameOver()
+    {
+        SceneManager.LoadScene("GameOver");
     }
 
     public void Restart()

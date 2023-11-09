@@ -225,22 +225,26 @@ public class CharacterController : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.gameObject.tag == "enemyHitBox")
+        if (collision.gameObject.CompareTag("enemyHitBox") || collision.gameObject.CompareTag("Bala"))
         {
-            m_vida.valorActual -= collision.gameObject.GetComponent<HitboxCharacter>().Damage;
-            m_cambioVida.Raise(m_vida.valorActual);
+            RecibirDaño(collision.gameObject.GetComponent<HitboxCharacter>().Damage);
+        }
 
+    }
 
+    private void RecibirDaño(int daño)
+    {
+        m_vida.valorActual -= daño;
+        m_cambioVida.Raise(m_vida.valorActual);
+        if (m_vida.valorActual <= 0)
+        {
+            GameManager m_gameManager = GameManager.Instance;
+            m_gameManager.GameOver();
 
         }
-        if (collision.gameObject.tag == "Bala")
-        {
-            m_vida.valorActual -= collision.gameObject.GetComponent<BalaController>().damage;
-           
-            
-        }
-      
 
+       
+        
     }
 
    
