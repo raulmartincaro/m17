@@ -3,12 +3,12 @@ using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEditor.Timeline.Actions;
 using UnityEngine;
-//using UnityEngine.InputSystem;
+using UnityEngine.InputSystem;
 using static EnemyController;
 
 public class CharacterController : MonoBehaviour
 {
-   /*
+   
     private enum SwitchMachinesStates {NONE, IDLE, WALK, HIT1, HIT2};
     private SwitchMachinesStates m_CurrentState;
 
@@ -156,6 +156,7 @@ public class CharacterController : MonoBehaviour
 
     [SerializeField]
     private InputActionAsset m_InputAsset;
+
     private InputActionAsset m_Input;
     private InputAction m_MovementAction;
     private Animator m_Animator;
@@ -234,5 +235,4 @@ public class CharacterController : MonoBehaviour
       
 
     }
-   */
 }

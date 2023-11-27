@@ -126,6 +126,7 @@ public class EnemyControllerDisparador : MonoBehaviour
                 }
                 break;
 
+
         }
     }
 
@@ -165,7 +166,16 @@ public class EnemyControllerDisparador : MonoBehaviour
         m_bala.m_dir = m_objetivo.transform.position;
         BalaController proyectil =Instantiate(m_bala,this.m_Rigidbody.transform.position, Quaternion.identity);
         proyectil.damage = m_damage;
-        ChangeState(switchMachineStates.RECARGANDO);
+        if (m_detector.Encontrado == false)
+        {
+            Debug.Log("lo he perdido");
+            m_objetivo = null;
+            ChangeState(switchMachineStates.PATROL);
+        }
+        else
+        {
+            ChangeState(switchMachineStates.RECARGANDO);
+        }
     }
 
     public void LoadInfo(EnemyInfo enemyinfo)

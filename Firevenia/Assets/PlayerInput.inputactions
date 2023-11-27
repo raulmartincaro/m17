@@ -1,0 +1,40 @@
+{
+    "name": "InputActionAsset",
+    "maps": [
+        {
+            "name": "New action map",
+            "id": "cd1aba2c-d793-4d30-8143-2c548920f47f",
+            "actions": [
+                {
+                    "name": "New action",
+                    "type": "Button",
+                    "id": "957496af-8fcf-47e1-b5ca-b0b678c68d6d",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "16332f7d-776a-4189-9285-d53936c397d8",
+                    "path": "",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "player",
+                    "action": "New action",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
+        }
+    ],
+    "controlSchemes": [
+        {
+            "name": "player",
+            "bindingGroup": "player",
+            "devices": []
+        }
+    ]
+}
