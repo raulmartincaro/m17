@@ -5,11 +5,11 @@ using UnityEngine;
 public class PeixController : MonoBehaviour
 {
     [SerializeField]
-   string m_nom; 
+    string m_nom; 
     [SerializeField]
-    int m_valor;
+    public int m_valor;
     [SerializeField]
-    int m_quantitat;
+    public int m_quantitat;
    public void loadInfo(peixosInfo p,int n)
    {
         m_nom = p.name;

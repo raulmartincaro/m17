@@ -8,10 +8,16 @@ public class BuscadorController : MonoBehaviour
 
     [SerializeField]
     GameEventInteger m_cosasAlrededor;
+    [SerializeField]
     private int m_cosa;
-
-   public void comprobarAlrededor()
+    private void Start()
     {
+        m_cosa = 0;
+    }
+
+    public void comprobarAlrededor()
+    {
+
         m_cosasAlrededor.Raise(m_cosa);
     }
     private void OnTriggerEnter2D(Collider2D collision)
