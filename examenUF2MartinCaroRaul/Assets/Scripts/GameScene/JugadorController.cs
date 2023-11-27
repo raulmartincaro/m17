@@ -13,6 +13,7 @@ public class JugadorController : MonoBehaviour, ISaveableObject
     private InputActionAsset m_InputAsset;
     private InputActionAsset m_Input;
     private InputAction m_MovementAction;
+    private InputAction m_AccionAction;
     private Rigidbody2D m_Rigidbody;
     private int m_Speed = 20;
     float maxSpeed = 3.0f;
@@ -79,6 +80,7 @@ public class JugadorController : MonoBehaviour, ISaveableObject
         m_Rigidbody = GetComponent<Rigidbody2D>();
         m_Input = Instantiate(m_InputAsset);
         m_MovementAction = m_Input.FindActionMap("Player").FindAction("Move");
+        m_Input.FindActionMap("Player").FindAction("Accion").performed += hacerAlgo;
         m_Input.FindActionMap("Player").Enable();
     }
 
@@ -105,4 +107,8 @@ public class JugadorController : MonoBehaviour, ISaveableObject
         throw new System.NotImplementedException();
     }
 
+    public void hacerAlgo(InputAction.CallbackContext actionContext)
+    {
+        Debug.Log("Estoy haciendo algo");
+    }
 }
